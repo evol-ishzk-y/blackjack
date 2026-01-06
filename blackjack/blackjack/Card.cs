@@ -8,10 +8,8 @@ namespace blackjack
 {
     internal class Card
     {
-        //List型の変数を作る(マーク)
-        List<string> marks = new List<string>();
+        public string mark;
 
-        //List型の変数を作る(数字)
-        List<int> nums = new List<int>();
+        public int num;
     }
 }
