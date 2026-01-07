@@ -44,3 +44,14 @@ for (int i = 0;i < 2;i++)
     //山札から引いた分のカードを消す
     deck.RemoveAt(0);
 }
+
+//dealerHand作成
+List<Card> dealerHand = new List<Card>();
+
+for (int i = 0; i < 2; i++)
+{
+    dealerHand.Add(deck[0]);
+
+    //山札から引いた分のカードを消す
+    deck.RemoveAt(0);
+}
