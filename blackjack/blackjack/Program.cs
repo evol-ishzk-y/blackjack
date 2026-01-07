@@ -33,3 +33,14 @@ for (int i = 0; i < deck.Count; i++)
     deck[i] = deck[j];
     deck[j] = tmp;  
 }
+
+//playerHand作成
+List<Card> playerHand = new List<Card>();
+
+for (int i = 0;i < 2;i++)
+{
+    playerHand.Add(deck[0]);
+
+    //山札から引いた分のカードを消す
+    deck.RemoveAt(0);
+}
