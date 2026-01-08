@@ -55,3 +55,20 @@ for (int i = 0; i < 2; i++)
     //山札から引いた分のカードを消す
     deck.RemoveAt(0);
 }
+
+//プレーヤーの手札を確認・計算
+int playerScore = 0;
+
+foreach(Card c in playerHand)
+{
+    Console.WriteLine(c);
+
+    if(c >= 10 && c <= 13)
+    {
+        playerHand += 10;
+    }
+    else
+    {
+        playerHand += c;
+    }
+}
