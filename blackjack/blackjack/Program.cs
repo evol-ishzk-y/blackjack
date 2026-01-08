@@ -61,14 +61,33 @@ int playerScore = 0;
 
 foreach(Card c in playerHand)
 {
-    Console.WriteLine(c);
+    Console.WriteLine("プレイヤーのカードは" + c.mark + "の" + c.num);
 
-    if(c >= 10 && c <= 13)
+    if(c.num >= 10 && c.num <= 13)
     {
-        playerHand += 10;
+        playerScore += 10;
     }
     else
     {
-        playerHand += c;
+        playerScore += c.num;
     }
 }
+Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
+
+int dealerScore = 0;
+
+foreach (Card c in dealerHand)
+{
+    Console.WriteLine("ディーラーのカードは" + c.mark + "の" + c.num);
+
+    if (c.num >= 10 && c.num <= 13)
+    {
+        dealerScore += 10;
+    }
+    else
+    {
+        dealerScore += c.num;
+    }
+}
+Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
+Console.ReadLine(); // 何かキーが押されるまで画面を閉じない
