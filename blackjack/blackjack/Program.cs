@@ -90,4 +90,18 @@ foreach (Card c in dealerHand)
     }
 }
 Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
+
+if (playerScore > dealerScore)
+{
+    Console.WriteLine("プレイヤーの勝ちです");
+}
+else if(dealerScore == playerScore)
+{
+    Console.WriteLine("引き分けです");
+}
+else
+{
+    Console.WriteLine("ディーラーの勝ちです");
+}
+    
 Console.ReadLine(); // 何かキーが押されるまで画面を閉じない
