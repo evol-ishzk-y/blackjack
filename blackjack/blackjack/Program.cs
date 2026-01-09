@@ -74,7 +74,40 @@ foreach(Card c in playerHand)
 }
 Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
 
-int dealerScore = 0;
+Console.WriteLine("もう一枚引きますか？　yes or no") ;
+
+string command = Console.ReadLine() ?? "";
+
+while (command == "yes")
+{
+    Card drownCard = deck[0];
+    //山札から引いた分のカードを消す
+    deck.RemoveAt(0);
+    Console.WriteLine("プレイヤーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
+
+    if (drownCard.num >= 10 && drownCard.num <= 13)
+    {
+        playerScore += 10;
+    }
+    else
+    {
+        playerScore += drownCard.num;
+    }
+
+    //２１以上になったらバースト
+    if(playerScore > 21)
+    {
+        Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
+        Console.WriteLine("バーストしました！");
+        break;
+    }
+
+    Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
+    Console.WriteLine("もう一枚引きますか？　yes or no");
+    command = Console.ReadLine();
+}
+
+    int dealerScore = 0;
 
 foreach (Card c in dealerHand)
 {
@@ -91,7 +124,11 @@ foreach (Card c in dealerHand)
 }
 Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
 
-if (playerScore > dealerScore)
+if(playerScore > 21)
+{
+    Console.WriteLine("バーストしたのであなたの負けです");
+}
+else if (playerScore > dealerScore)
 {
     Console.WriteLine("プレイヤーの勝ちです");
 }
@@ -104,4 +141,5 @@ else
     Console.WriteLine("ディーラーの勝ちです");
 }
     
-Console.ReadLine(); // 何かキーが押されるまで画面を閉じない
+Console.WriteLine("Enterを押して終了"); // 何かキーが押されるまで画面を閉じない
+Console.ReadLine();
