@@ -107,11 +107,19 @@ while (command == "yes")
     command = Console.ReadLine();
 }
 
-    int dealerScore = 0;
+int dealerScore = 0;
+int count = 0;
 
 foreach (Card c in dealerHand)
 {
-    Console.WriteLine("ディーラーのカードは" + c.mark + "の" + c.num);
+    if(count == 1)
+    {
+        Console.WriteLine("ディーラーの2枚目のカードはわかりません");
+    }
+    else
+    {
+        Console.WriteLine("ディーラーのカードは" + c.mark + "の" + c.num);
+    }
 
     if (c.num >= 10 && c.num <= 13)
     {
@@ -121,18 +129,49 @@ foreach (Card c in dealerHand)
     {
         dealerScore += c.num;
     }
+    count++;
+}
+
+
+while(dealerScore < 17)
+{
+    Card drownCard = deck[0];
+    //山札から引いた分のカードを消す
+    deck.RemoveAt(0);
+    Console.WriteLine("ディーラーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
+
+    if (drownCard.num >= 10 && drownCard.num <= 13)
+    {
+        dealerScore += 10;
+    }
+    else
+    {
+        dealerScore += drownCard.num;
+    }
+
+    //２１になったらバースト
+    if (dealerScore > 21)
+    {
+        Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
+        Console.WriteLine("バーストしました！");
+        break;
+    }
 }
 Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
 
-if(playerScore > 21)
+if (playerScore > 21)
 {
     Console.WriteLine("バーストしたのであなたの負けです");
+}
+else if(dealerScore > 21)
+{
+    Console.WriteLine("ディーラーがバーストしたのであなたの勝ちです");
 }
 else if (playerScore > dealerScore)
 {
     Console.WriteLine("プレイヤーの勝ちです");
 }
-else if(dealerScore == playerScore)
+else if (dealerScore == playerScore)
 {
     Console.WriteLine("引き分けです");
 }
