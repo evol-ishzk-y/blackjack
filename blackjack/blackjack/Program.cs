@@ -1,6 +1,9 @@
 ﻿using blackjack;
 using System;
 
+const int Total_Cards = 52;
+const int BurstScore = 21;
+
 //Listの山札作成
 List<Card> deck = new List<Card>();
 
@@ -22,7 +25,7 @@ foreach (string m  in markTypes)
 
 //Listのインデックスをシャッフル
 Random rand = new Random();
-rand.Next(52);
+rand.Next(Total_Cards);
 
 //配列の中身をシャッフルさせる
 for (int i = 0; i < deck.Count; i++)
@@ -76,7 +79,13 @@ Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
 
 Console.WriteLine("もう一枚引きますか？　yes or no") ;
 
-string command = Console.ReadLine() ?? "";
+string command = Console.ReadLine()?.ToLower() ?? "";
+
+while(command != "yes" && command != "no")
+{
+    Console.WriteLine("yesかnoで入力してください");
+    command = Console.ReadLine()?.ToLower() ?? "";
+}
 
 while (command == "yes")
 {
@@ -95,7 +104,7 @@ while (command == "yes")
     }
 
     //２１以上になったらバースト
-    if(playerScore > 21)
+    if(playerScore > BurstScore)
     {
         Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
         Console.WriteLine("バーストしました！");
@@ -104,7 +113,7 @@ while (command == "yes")
 
     Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
     Console.WriteLine("もう一枚引きますか？　yes or no");
-    command = Console.ReadLine();
+    command = Console.ReadLine()?.ToLower() ?? "";
 }
 
 int dealerScore = 0;
@@ -132,8 +141,9 @@ foreach (Card c in dealerHand)
     count++;
 }
 
+const int DealerStopScore = 17;
 
-while(dealerScore < 17)
+while (dealerScore < DealerStopScore)
 {
     Card drownCard = deck[0];
     //山札から引いた分のカードを消す
@@ -150,7 +160,7 @@ while(dealerScore < 17)
     }
 
     //２１になったらバースト
-    if (dealerScore > 21)
+    if (dealerScore > BurstScore)
     {
         Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
         Console.WriteLine("バーストしました！");
@@ -159,11 +169,11 @@ while(dealerScore < 17)
 }
 Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
 
-if (playerScore > 21)
+if (playerScore > BurstScore)
 {
     Console.WriteLine("バーストしたのであなたの負けです");
 }
-else if(dealerScore > 21)
+else if(dealerScore > BurstScore)
 {
     Console.WriteLine("ディーラーがバーストしたのであなたの勝ちです");
 }
