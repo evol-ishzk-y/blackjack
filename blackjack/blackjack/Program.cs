@@ -66,14 +66,7 @@ foreach(Card c in playerHand)
 {
     Console.WriteLine("プレイヤーのカードは" + c.mark + "の" + c.num);
 
-    if(c.num >= 10 && c.num <= 13)
-    {
-        playerScore += 10;
-    }
-    else
-    {
-        playerScore += c.num;
-    }
+    playerScore += GetCardScore(c);
 }
 Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
 
@@ -89,14 +82,7 @@ while (command == "yes")
     deck.RemoveAt(0);
     Console.WriteLine("プレイヤーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
 
-    if (drownCard.num >= 10 && drownCard.num <= 13)
-    {
-        playerScore += 10;
-    }
-    else
-    {
-        playerScore += drownCard.num;
-    }
+    playerScore += GetCardScore(drownCard);
 
     //２１以上になったらバースト
     if(playerScore > BurstScore)
@@ -127,14 +113,7 @@ foreach (Card c in dealerHand)
         Console.WriteLine("ディーラーのカードは" + c.mark + "の" + c.num);
     }
 
-    if (c.num >= 10 && c.num <= 13)
-    {
-        dealerScore += 10;
-    }
-    else
-    {
-        dealerScore += c.num;
-    }
+    dealerScore += GetCardScore(c);
     count++;
 }
 
@@ -147,14 +126,7 @@ while (dealerScore < DealerStopScore)
     deck.RemoveAt(0);
     Console.WriteLine("ディーラーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
 
-    if (drownCard.num >= 10 && drownCard.num <= 13)
-    {
-        dealerScore += 10;
-    }
-    else
-    {
-        dealerScore += drownCard.num;
-    }
+    dealerScore += GetCardScore(drownCard);
 
     //２１になったらバースト
     if (dealerScore > BurstScore)
@@ -199,4 +171,10 @@ string AskYesNo()
         input = Console.ReadLine()?.ToLower() ?? "";
     }
     return input;
+}
+
+int GetCardScore(Card card)
+{
+    if (card.num >= 10 && card.num <= 13) return 10;
+    return card.num;
 }
