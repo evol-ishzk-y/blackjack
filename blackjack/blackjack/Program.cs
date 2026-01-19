@@ -79,13 +79,8 @@ Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
 
 Console.WriteLine("もう一枚引きますか？　yes or no") ;
 
-string command = Console.ReadLine()?.ToLower() ?? "";
+string command = AskYesNo();
 
-while(command != "yes" && command != "no")
-{
-    Console.WriteLine("yesかnoで入力してください");
-    command = Console.ReadLine()?.ToLower() ?? "";
-}
 
 while (command == "yes")
 {
@@ -113,15 +108,17 @@ while (command == "yes")
 
     Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
     Console.WriteLine("もう一枚引きますか？　yes or no");
-    command = Console.ReadLine()?.ToLower() ?? "";
+    command = AskYesNo();
 }
 
 int dealerScore = 0;
 int count = 0;
 
+
 foreach (Card c in dealerHand)
 {
-    if(count == 1)
+
+    if (count == 1)
     {
         Console.WriteLine("ディーラーの2枚目のカードはわかりません");
     }
@@ -192,3 +189,14 @@ else
     
 Console.WriteLine("Enterを押して終了"); // 何かキーが押されるまで画面を閉じない
 Console.ReadLine();
+
+string AskYesNo()
+{
+    string input = Console.ReadLine()?.ToLower() ?? "";
+    while (input != "yes" && input != "no")
+    {
+        Console.WriteLine("yesかnoで入力してください");
+        input = Console.ReadLine()?.ToLower() ?? "";
+    }
+    return input;
+}
