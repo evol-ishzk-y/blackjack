@@ -1,51 +1,17 @@
 ﻿using blackjack;
 using System;
 
-const int Total_Cards = 52;
 const int BurstScore = 21;
 
-//Listの山札作成
-List<Card> deck = new List<Card>();
-
-//マークを格納
-string[] markTypes = {"heart", "diamond", "spade", "clover"};
-
-foreach (string m  in markTypes)
-{
-    for(int i = 1; i <= 13; i++ )
-    {
-        Card c = new Card();
-        c.mark = m;
-        c.num = i;
- 
-        //deckに５２枚のカードをいれる
-        deck.Add(c);
-    }
-}
-
-//Listのインデックスをシャッフル
-Random rand = new Random();
-rand.Next(Total_Cards);
-
-//配列の中身をシャッフルさせる
-for (int i = 0; i < deck.Count; i++)
-{
-    int j = rand.Next(deck.Count);
-
-    Card tmp = deck[i];
-    deck[i] = deck[j];
-    deck[j] = tmp;  
-}
+Deck deck = new Deck();
+deck.Shuffle();
 
 //playerHand作成
 List<Card> playerHand = new List<Card>();
 
 for (int i = 0;i < 2;i++)
 {
-    playerHand.Add(deck[0]);
-
-    //山札から引いた分のカードを消す
-    deck.RemoveAt(0);
+    playerHand.Add(deck.Draw());
 }
 
 //dealerHand作成
@@ -53,10 +19,7 @@ List<Card> dealerHand = new List<Card>();
 
 for (int i = 0; i < 2; i++)
 {
-    dealerHand.Add(deck[0]);
-
-    //山札から引いた分のカードを消す
-    deck.RemoveAt(0);
+    dealerHand.Add(deck.Draw());
 }
 
 //プレーヤーの手札を確認・計算
@@ -77,9 +40,7 @@ string command = AskYesNo();
 
 while (command == "yes")
 {
-    Card drownCard = deck[0];
-    //山札から引いた分のカードを消す
-    deck.RemoveAt(0);
+    Card drownCard = deck.Draw();
     Console.WriteLine("プレイヤーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
 
     playerScore += drownCard.GetCard();
@@ -121,9 +82,7 @@ const int DealerStopScore = 17;
 
 while (dealerScore < DealerStopScore)
 {
-    Card drownCard = deck[0];
-    //山札から引いた分のカードを消す
-    deck.RemoveAt(0);
+    Card drownCard = deck.Draw();
     Console.WriteLine("ディーラーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
 
     dealerScore += drownCard.GetCard();
