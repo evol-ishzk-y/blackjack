@@ -8,8 +8,13 @@ namespace blackjack
 {
     internal class Card
     {
-        public string mark;
-
+        public string mark = "";
         public int num;
+
+        public int GetCard()
+        {
+            if (num >= 10 && num <= 13) return 10;
+            return num;
+        }
     }
 }
