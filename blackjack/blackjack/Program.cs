@@ -6,63 +6,48 @@ const int BurstScore = 21;
 Deck deck = new Deck();
 deck.Shuffle();
 
-//playerHand作成
-List<Card> playerHand = new List<Card>();
+Player player = new Player();
+Player dealer = new Player();
 
-for (int i = 0;i < 2;i++)
-{
-    playerHand.Add(deck.Draw());
-}
-
-//dealerHand作成
-List<Card> dealerHand = new List<Card>();
-
+//最初の二枚配る
 for (int i = 0; i < 2; i++)
 {
-    dealerHand.Add(deck.Draw());
+    player.AddCard(deck.Draw());
+    dealer.AddCard(deck.Draw());
 }
 
-//プレーヤーの手札を確認・計算
-int playerScore = 0;
-
-foreach(Card c in playerHand)
+foreach(Card c in player.hand)
 {
     Console.WriteLine("プレイヤーのカードは" + c.mark + "の" + c.num);
-
-    playerScore += c.GetCard();
 }
-Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
+Console.WriteLine("プレイヤーのカードの合計値は" + player.GetTotalScore());
 
 Console.WriteLine("もう一枚引きますか？　yes or no") ;
 
 string command = AskYesNo();
 
-
 while (command == "yes")
 {
     Card drownCard = deck.Draw();
     Console.WriteLine("プレイヤーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
-
-    playerScore += drownCard.GetCard();
+    player.AddCard(drownCard);
 
     //２１以上になったらバースト
-    if(playerScore > BurstScore)
+    if (player.GetTotalScore() > BurstScore)
     {
-        Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
+        Console.WriteLine("プレイヤーのカードの合計値は" + player.GetTotalScore());
         Console.WriteLine("バーストしました！");
         break;
     }
 
-    Console.WriteLine("プレイヤーのカードの合計値は" + playerScore);
+    Console.WriteLine("プレイヤーのカードの合計値は" + player.GetTotalScore());
     Console.WriteLine("もう一枚引きますか？　yes or no");
     command = AskYesNo();
 }
 
-int dealerScore = 0;
 int count = 0;
 
-
-foreach (Card c in dealerHand)
+foreach (Card c in dealer.hand)
 {
 
     if (count == 1)
@@ -73,43 +58,40 @@ foreach (Card c in dealerHand)
     {
         Console.WriteLine("ディーラーのカードは" + c.mark + "の" + c.num);
     }
-
-    dealerScore += c.GetCard();
     count++;
 }
 
 const int DealerStopScore = 17;
 
-while (dealerScore < DealerStopScore)
+while (dealer.GetTotalScore() < DealerStopScore)
 {
     Card drownCard = deck.Draw();
     Console.WriteLine("ディーラーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
-
-    dealerScore += drownCard.GetCard();
+    dealer.AddCard(drownCard);
 
     //２１になったらバースト
-    if (dealerScore > BurstScore)
+    if (dealer.GetTotalScore() > BurstScore)
     {
-        Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
+        Console.WriteLine("ディーラーのカードの合計値は" + dealer.GetTotalScore());
         Console.WriteLine("バーストしました！");
         break;
     }
 }
-Console.WriteLine("ディーラーのカードの合計値は" + dealerScore);
+Console.WriteLine("ディーラーのカードの合計値は" + dealer.GetTotalScore());
 
-if (playerScore > BurstScore)
+if (player.GetTotalScore() > BurstScore)
 {
     Console.WriteLine("バーストしたのであなたの負けです");
 }
-else if(dealerScore > BurstScore)
+else if(dealer.GetTotalScore() > BurstScore)
 {
     Console.WriteLine("ディーラーがバーストしたのであなたの勝ちです");
 }
-else if (playerScore > dealerScore)
+else if (player.GetTotalScore() > dealer.GetTotalScore())
 {
     Console.WriteLine("プレイヤーの勝ちです");
 }
-else if (dealerScore == playerScore)
+else if (dealer.GetTotalScore() == player.GetTotalScore())
 {
     Console.WriteLine("引き分けです");
 }
