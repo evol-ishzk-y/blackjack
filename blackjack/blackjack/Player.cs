@@ -20,7 +20,7 @@ namespace blackjack
             int total = 0;
             foreach (Card card in hand)
             {
-                total += card.GetCard(); 
+                total += card.NumberCard(); 
             }
             return total;
         }

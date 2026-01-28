@@ -12,8 +12,8 @@ Player dealer = new Player();
 //最初の二枚配る
 for (int i = 0; i < 2; i++)
 {
-    player.AddCard(deck.passCard());
-    dealer.AddCard(deck.passCard());
+    player.AddCard(deck.PassCard());
+    dealer.AddCard(deck.PassCard());
 }
 
 foreach(Card c in player.hand)
@@ -28,7 +28,7 @@ string command = AskYesNo();
 
 while (command == "yes")
 {
-    Card drownCard = deck.passCard();
+    Card drownCard = deck.PassCard();
     Console.WriteLine("プレイヤーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
     player.AddCard(drownCard);
 
@@ -65,7 +65,7 @@ const int DealerStopScore = 17;
 
 while (dealer.GetTotalScore() < DealerStopScore)
 {
-    Card drownCard = deck.passCard();
+    Card drownCard = deck.PassCard();
     Console.WriteLine("ディーラーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
     dealer.AddCard(drownCard);
 

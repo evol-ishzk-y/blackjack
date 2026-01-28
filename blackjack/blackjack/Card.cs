@@ -11,7 +11,7 @@ namespace blackjack
         public string mark = "";
         public int num;
 
-        public int GetCard()
+        public int NumberCard()
         {
             if (num >= 10 && num <= 13) return 10;
             return num;

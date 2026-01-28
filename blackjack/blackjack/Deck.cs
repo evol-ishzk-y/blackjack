@@ -11,11 +11,9 @@ namespace blackjack
     {
         const int Total_Cards = 52;
 
-        // 1. クラスの持ち物（フィールド）を定義
         private List<Card> cards = new List<Card>();
         private Random rand = new Random();
 
-        // 2. コンストラクタ（Deckが作られた瞬間に動く）
         public Deck()
         {
             string[] markTypes = { "heart", "diamond", "spade", "clover" };
@@ -32,7 +30,6 @@ namespace blackjack
             }
         }
 
-        // 3. シャッフル機能
         public void Shuffle()
         {
             for (int i = 0; i < cards.Count; i++)
@@ -44,8 +41,7 @@ namespace blackjack
             }
         }
 
-        // 4. カードを1枚渡す機能（Card型を返す）
-        public Card passCard()
+        public Card PassCard()
         {
             Card pickedCard = cards[0]; // 一番上のカードを確保
             cards.RemoveAt(0);          // 山札から削除
