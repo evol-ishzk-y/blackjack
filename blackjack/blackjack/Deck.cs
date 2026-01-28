@@ -45,7 +45,7 @@ namespace blackjack
         }
 
         // 4. カードを1枚渡す機能（Card型を返す）
-        public Card Draw()
+        public Card passCard()
         {
             Card pickedCard = cards[0]; // 一番上のカードを確保
             cards.RemoveAt(0);          // 山札から削除
