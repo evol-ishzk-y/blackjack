@@ -15,7 +15,7 @@ namespace blackjack
             hand.Add(card);
         }
 
-        public int GetTotalScore()
+        public int AddTotalScore()
         {
             int total = 0;
             foreach (Card card in hand)

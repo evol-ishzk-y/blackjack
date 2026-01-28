@@ -20,7 +20,7 @@ foreach(Card c in player.hand)
 {
     Console.WriteLine("プレイヤーのカードは" + c.mark + "の" + c.num);
 }
-Console.WriteLine("プレイヤーのカードの合計値は" + player.GetTotalScore());
+Console.WriteLine("プレイヤーのカードの合計値は" + player.AddTotalScore());
 
 Console.WriteLine("もう一枚引きますか？　yes or no") ;
 
@@ -33,14 +33,14 @@ while (command == "yes")
     player.HandCard(drownCard);
 
     //２１以上になったらバースト
-    if (player.GetTotalScore() > BurstScore)
+    if (player.AddTotalScore() > BurstScore)
     {
-        Console.WriteLine("プレイヤーのカードの合計値は" + player.GetTotalScore());
+        Console.WriteLine("プレイヤーのカードの合計値は" + player.AddTotalScore());
         Console.WriteLine("バーストしました！");
         break;
     }
 
-    Console.WriteLine("プレイヤーのカードの合計値は" + player.GetTotalScore());
+    Console.WriteLine("プレイヤーのカードの合計値は" + player.AddTotalScore());
     Console.WriteLine("もう一枚引きますか？　yes or no");
     command = AskYesNo();
 }
@@ -63,35 +63,35 @@ foreach (Card c in dealer.hand)
 
 const int DealerStopScore = 17;
 
-while (dealer.GetTotalScore() < DealerStopScore)
+while (dealer.AddTotalScore() < DealerStopScore)
 {
     Card drownCard = deck.PassCard();
     Console.WriteLine("ディーラーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
     dealer.HandCard(drownCard);
 
     //２１になったらバースト
-    if (dealer.GetTotalScore() > BurstScore)
+    if (dealer.AddTotalScore() > BurstScore)
     {
-        Console.WriteLine("ディーラーのカードの合計値は" + dealer.GetTotalScore());
+        Console.WriteLine("ディーラーのカードの合計値は" + dealer.AddTotalScore());
         Console.WriteLine("バーストしました！");
         break;
     }
 }
-Console.WriteLine("ディーラーのカードの合計値は" + dealer.GetTotalScore());
+Console.WriteLine("ディーラーのカードの合計値は" + dealer.AddTotalScore());
 
-if (player.GetTotalScore() > BurstScore)
+if (player.AddTotalScore() > BurstScore)
 {
     Console.WriteLine("バーストしたのであなたの負けです");
 }
-else if(dealer.GetTotalScore() > BurstScore)
+else if(dealer.AddTotalScore() > BurstScore)
 {
     Console.WriteLine("ディーラーがバーストしたのであなたの勝ちです");
 }
-else if (player.GetTotalScore() > dealer.GetTotalScore())
+else if (player.AddTotalScore() > dealer.AddTotalScore())
 {
     Console.WriteLine("プレイヤーの勝ちです");
 }
-else if (dealer.GetTotalScore() == player.GetTotalScore())
+else if (dealer.AddTotalScore() == player.AddTotalScore())
 {
     Console.WriteLine("引き分けです");
 }
