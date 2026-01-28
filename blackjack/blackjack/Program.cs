@@ -12,8 +12,8 @@ Player dealer = new Player();
 //最初の二枚配る
 for (int i = 0; i < 2; i++)
 {
-    player.AddCard(deck.PassCard());
-    dealer.AddCard(deck.PassCard());
+    player.HandCard(deck.PassCard());
+    dealer.HandCard(deck.PassCard());
 }
 
 foreach(Card c in player.hand)
@@ -30,7 +30,7 @@ while (command == "yes")
 {
     Card drownCard = deck.PassCard();
     Console.WriteLine("プレイヤーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
-    player.AddCard(drownCard);
+    player.HandCard(drownCard);
 
     //２１以上になったらバースト
     if (player.GetTotalScore() > BurstScore)
@@ -67,7 +67,7 @@ while (dealer.GetTotalScore() < DealerStopScore)
 {
     Card drownCard = deck.PassCard();
     Console.WriteLine("ディーラーのカードの引いたカードは" + drownCard.mark + "の" + drownCard.num);
-    dealer.AddCard(drownCard);
+    dealer.HandCard(drownCard);
 
     //２１になったらバースト
     if (dealer.GetTotalScore() > BurstScore)

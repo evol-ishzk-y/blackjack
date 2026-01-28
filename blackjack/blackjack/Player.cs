@@ -10,7 +10,7 @@ namespace blackjack
     {
         public List<Card> hand = new List<Card>();
 
-        public void AddCard(Card card)
+        public void HandCard(Card card)
         {
             hand.Add(card);
         }
